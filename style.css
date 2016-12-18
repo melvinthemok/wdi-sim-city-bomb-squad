@@ -1,0 +1,62 @@
+body {
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.unexploded {
+  background-image: url('img/simcity.jpg');
+}
+
+.blackbox {
+  background-color: black;
+  width: 160px;
+  height: 350px;
+  margin: 100px auto 0 auto;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.timer {
+  background-color: black;
+  height: 40px;
+  font-family: monospace;
+  font-size: 18px;
+  color: red;
+  line-height: 10px;
+}
+
+.wires {
+  background-color: black;
+  height: 260px;
+  margin: 10px 0 0 0;
+}
+
+#blue,
+#green,
+#red,
+#white,
+#yellow {
+  cursor: pointer;
+}
+
+.reset {
+  background-color: gray;
+  height: 24px;
+  width: 100px;
+  margin: 12px 0 0 0;
+  font-family: monospace;
+  font-size: 12px;
+  text-align: center;
+  line-height: 0px;
+
+}
+
+.reset:hover {
+  cursor: pointer;
+  background-color: red;
+  color: white;
+}
