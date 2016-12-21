@@ -3,8 +3,9 @@ body {
   margin: 0 auto;
 }
 
-.unexploded {
-  background-image: url('img/simcity.jpg');
+html {
+  background: url(img/simcity.jpg) no-repeat center center fixed;
+  background-size: cover;
 }
 
 .blackbox {
@@ -17,7 +18,6 @@ body {
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
-
 }
 
 .timer {
@@ -26,7 +26,7 @@ body {
   font-family: monospace;
   font-size: 18px;
   color: red;
-  line-height: 10px;
+  line-height: 40px;
 }
 
 .wires {

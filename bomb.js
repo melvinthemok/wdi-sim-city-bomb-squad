@@ -28,9 +28,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function updateTime () {
     clearInterval(intervalID)
-    intervalID = setInterval(updateTime, 100)
-    seconds = Number(seconds) - 0.1
-    seconds = seconds.toFixed(1)
+    intervalID = setInterval(updateTime, 5)
+    seconds = Number(seconds) - 0.005
+    seconds = seconds.toFixed(3)
+    if (seconds >= 10) {
+      $('.timer').text('0:00:' + seconds)
+    } else if (seconds < 10) {
+      $('.timer').text('0:00:0' + seconds)
+    }
+    safeOrBoom()
+  }
+
+  function delayExplode () {
+    clearInterval(intervalID)
+    setTimeout(function () {
+      $('html').css('background', 'url(img/explosion.jpg) no-repeat center center fixed')
+      $('html').css('background-size', 'cover')
+    }, 700)
+  }
+
+  function safeOrBoom () {
     if (leftToCut === 0) {
       $('.timer').css('color', 'green')
       clearInterval(intervalID)
@@ -38,21 +55,16 @@ document.addEventListener('DOMContentLoaded', function () {
       clearInterval(intervalID)
       delayExplode()
     }
-    $('.timer').text('0:00:' + seconds + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10))
   }
 
   randomize()
+  console.log('The wires to be cut is/are ' + toCut)
+  console.log('The wires not to be cut is/are ' + dontCut)
   updateTime()
+  // safeOrBoom()
 
   function cut (uncut, cutImage) {
     uncut.attr('src', cutImage)
-  }
-
-  function delayExplode () {
-    clearInterval(intervalID)
-    setTimeout(function () {
-      $('.unexploded').css('background-image', 'url("img/explosion.jpg")')
-    }, 700)
   }
 
   $('#blue').on('click', function () {
@@ -103,8 +115,8 @@ document.addEventListener('DOMContentLoaded', function () {
   $('.reset').on('click', function () {
     reset()
     randomize()
-    console.log(toCut)
-    console.log(dontCut)
+    console.log('The wires to be cut is/are ' + toCut)
+    console.log('The wires not to be cut is/are ' + dontCut)
   })
 
   function reset () {
@@ -115,7 +127,8 @@ document.addEventListener('DOMContentLoaded', function () {
     $('#red').attr('src', 'img/uncut-red-wire.png')
     $('#white').attr('src', 'img/uncut-white-wire.png')
     $('#yellow').attr('src', 'img/uncut-yellow-wire.png')
-    $('.unexploded').css('background-image', 'url("img/simcity.jpg")')
+    $('html').css('background', 'url(img/simcity.jpg) no-repeat center center fixed')
+    $('html').css('background-size', 'cover')
     $('.timer').css('color', 'red')
     seconds = 30
     updateTime()
