@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
     leftToCut = toCut.length
+    if (dontCut.length === 0) {
+      toCut = []
+      randomize()
+    }
+    console.log('The wires to be cut is/are ' + toCut)
+    console.log('The wires not to be cut is/are ' + dontCut)
   }
 
   function updateTime () {
@@ -44,84 +50,93 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
       $('html').css('background', 'url(img/explosion.jpg) no-repeat center center fixed')
       $('html').css('background-size', 'cover')
-    }, 700)
+    }, 750)
+    $('#blue').off('click')
+    $('#green').off('click')
+    $('#red').off('click')
+    $('#white').off('click')
+    $('#yellow').off('click')
   }
 
   function safeOrBoom () {
     if (leftToCut === 0) {
       $('.timer').css('color', 'green')
       clearInterval(intervalID)
+      $('#blue').off('click')
+      $('#green').off('click')
+      $('#red').off('click')
+      $('#white').off('click')
+      $('#yellow').off('click')
     } else if (seconds <= 0) {
       clearInterval(intervalID)
       delayExplode()
     }
   }
 
+  function eventHandler () {
+    $('#blue').on('click', function () {
+      cut($(this), 'img/cut-blue-wire.png')
+      if (dontCut.includes('blue')) {
+        delayExplode()
+      } else if (toCut.includes('blue')) {
+        leftToCut -= 1
+        $('#blue').off('click')
+      }
+    })
+
+    $('#green').on('click', function () {
+      cut($(this), 'img/cut-green-wire.png')
+      if (dontCut.includes('green')) {
+        delayExplode()
+      } else if (toCut.includes('green')) {
+        leftToCut -= 1
+        $('#green').off('click')
+      }
+    })
+
+    $('#red').on('click', function () {
+      cut($(this), 'img/cut-red-wire.png')
+      if (dontCut.includes('red')) {
+        delayExplode()
+      } else if (toCut.includes('red')) {
+        leftToCut -= 1
+        $('#red').off('click')
+      }
+    })
+
+    $('#white').on('click', function () {
+      cut($(this), 'img/cut-white-wire.png')
+      if (dontCut.includes('white')) {
+        delayExplode()
+      } else if (toCut.includes('white')) {
+        leftToCut -= 1
+        $('#white').off('click')
+      }
+    })
+
+    $('#yellow').on('click', function () {
+      cut($(this), 'img/cut-yellow-wire.png')
+      if (dontCut.includes('yellow')) {
+        delayExplode()
+      } else if (toCut.includes('yellow')) {
+        leftToCut -= 1
+        $('#yellow').off('click')
+      }
+    })
+  }
+
   randomize()
-  console.log('The wires to be cut is/are ' + toCut)
-  console.log('The wires not to be cut is/are ' + dontCut)
   updateTime()
-  // safeOrBoom()
+  eventHandler()
 
   function cut (uncut, cutImage) {
     uncut.attr('src', cutImage)
   }
 
-  $('#blue').on('click', function () {
-    cut($(this), 'img/cut-blue-wire.png')
-    if (dontCut.includes('blue')) {
-      delayExplode()
-    } else if (toCut.includes('blue')) {
-      leftToCut -= 1
-    }
-  })
-
-  $('#green').on('click', function () {
-    cut($(this), 'img/cut-green-wire.png')
-    if (dontCut.includes('green')) {
-      delayExplode()
-    } else if (toCut.includes('green')) {
-      leftToCut -= 1
-    }
-  })
-
-  $('#red').on('click', function () {
-    cut($(this), 'img/cut-red-wire.png')
-    if (dontCut.includes('red')) {
-      delayExplode()
-    } else if (toCut.includes('red')) {
-      leftToCut -= 1
-    }
-  })
-
-  $('#white').on('click', function () {
-    cut($(this), 'img/cut-white-wire.png')
-    if (dontCut.includes('white')) {
-      delayExplode()
-    } else if (toCut.includes('white')) {
-      leftToCut -= 1
-    }
-  })
-
-  $('#yellow').on('click', function () {
-    cut($(this), 'img/cut-yellow-wire.png')
-    if (dontCut.includes('yellow')) {
-      delayExplode()
-    } else if (toCut.includes('yellow')) {
-      leftToCut -= 1
-    }
-  })
-
-  $('.reset').on('click', function () {
-    reset()
-    randomize()
-    console.log('The wires to be cut is/are ' + toCut)
-    console.log('The wires not to be cut is/are ' + dontCut)
-  })
-
   function reset () {
     toCut = []
     dontCut = []
+
     $('#blue').attr('src', 'img/uncut-blue-wire.png')
     $('#green').attr('src', 'img/uncut-green-wire.png')
     $('#red').attr('src', 'img/uncut-red-wire.png')
@@ -131,6 +146,12 @@ document.addEventListener('DOMContentLoaded', function () {
     $('html').css('background-size', 'cover')
     $('.timer').css('color', 'red')
     seconds = 30
+    randomize()
     updateTime()
+    eventHandler()
   }
+
+  $('.reset').on('click', function () {
+    reset()
+  })
 })
