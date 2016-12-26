@@ -12,15 +12,20 @@
   </head>
   <body>
     <div class='blackbox'>
+      <audio id='sirenSound' autoplay loop src='sounds/siren.wav' type='audio/wav'></audio>
+      <audio id='cutSound' src='sounds/electricity.wav' type='audio/wav'></audio>
+      <audio id='boomSound' src='sounds/BldgExplode.wav' type='audio/wav'></audio>
+      <audio id='yaySound' src='sounds/CrowdYay.wav' type='audio/wav'></audio>
+      <audio id='successSound' src='sounds/success.ogg' type='audio/ogg'></audio>
       <div class='timer'>
         <p>0:00:</p>
       </div>
       <div class='wires'>
-        <img id='blue' src='img/uncut-blue-wire.png'>
-        <img id='green' src='img/uncut-green-wire.png'>
-        <img id='red' src='img/uncut-red-wire.png'>
-        <img id='white' src='img/uncut-white-wire.png'>
-        <img id='yellow' src='img/uncut-yellow-wire.png'>
+        <img id='blue' class='wire' src='img/uncut-blue-wire.png'>
+        <img id='green' class='wire' src='img/uncut-green-wire.png'>
+        <img id='red' class='wire' src='img/uncut-red-wire.png'>
+        <img id='white' class='wire' src='img/uncut-white-wire.png'>
+        <img id='yellow' class='wire' src='img/uncut-yellow-wire.png'>
       </div>
       <div class="reset">
         <p>reset</p>

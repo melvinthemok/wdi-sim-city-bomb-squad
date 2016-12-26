@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
       toCut = []
       randomize()
     }
-    console.log('The wires to be cut is/are ' + toCut)
-    console.log('The wires not to be cut is/are ' + dontCut)
+    console.log('Psst, cut the ' + toCut + ' wire(s).')
+    console.log('Don\'t cut the ' + dontCut + ' wire(s)!')
   }
 
   function updateTime () {
@@ -46,10 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function delayExplode () {
+    $('#sirenSound').get(0).pause()
     clearInterval(intervalID)
     setTimeout(function () {
       $('html').css('background', 'url(img/explosion.jpg) no-repeat center center fixed')
       $('html').css('background-size', 'cover')
+      $('#boomSound').get(0).play()
     }, 750)
     $('#blue').off('click')
     $('#green').off('click')
@@ -60,6 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function safeOrBoom () {
     if (leftToCut === 0) {
+      $('#sirenSound').get(0).pause()
+      $('#yaySound').get(0).play()
       $('.timer').css('color', 'green')
       clearInterval(intervalID)
       $('#blue').off('click')
@@ -72,6 +76,10 @@ document.addEventListener('DOMContentLoaded', function () {
       delayExplode()
     }
   }
+
+  $('#yaySound').on('ended', function () {
+    $('#successSound').get(0).play()
+  })
 
   function eventHandler () {
     $('#blue').on('click', function () {
@@ -131,12 +139,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function cut (uncut, cutImage) {
     uncut.attr('src', cutImage)
+    $('#cutSound').get(0).play()
   }
 
   function reset () {
     toCut = []
     dontCut = []
 
+    $('#sirenSound').get(0).play()
+    $('#successSound').get(0).pause()
     $('#blue').attr('src', 'img/uncut-blue-wire.png')
     $('#green').attr('src', 'img/uncut-green-wire.png')
     $('#red').attr('src', 'img/uncut-red-wire.png')
